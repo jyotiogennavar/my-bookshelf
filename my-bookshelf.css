@@ -1,0 +1,399 @@
+
+/* ── Theme tokens (oklch, light only) ── */
+:root {
+  --bg: oklch(93% 0.03 85);
+  --wall: oklch(86% 0.06 75);
+  --ink: oklch(24% 0.04 55);
+  --ink-soft: oklch(42% 0.05 55);
+  --ink-mute: oklch(56% 0.07 55);
+  --accent: oklch(58% 0.18 28);
+  --accent-soft: oklch(76% 0.13 45);
+  --plank: oklch(72% 0.12 55);
+  --plank-edge: oklch(46% 0.10 48);
+  --card: oklch(97% 0.02 85);
+  --card-border: oklch(72% 0.09 55);
+  --divider: oklch(82% 0.05 55);
+}
+
+.faculty-glyphic-regular {
+  font-family: "Faculty Glyphic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  /* Wallpaper pattern (plus-lines) tinted in a warm accent, repeated subtly. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='84' height='16' viewBox='0 0 84 16'><path fill='%23c69a6a' fill-opacity='0.16' d='M78,7 L78,4 L76,4 L76,7 L73,7 L73,9 L76,9 L76,12 L78,12 L78,9 L81,9 L81,7 L78,7 L78,7 Z M30,7 L30,4 L28,4 L28,7 L25,7 L25,9 L28,9 L28,12 L30,12 L30,9 L33,9 L33,7 L30,7 L30,7 Z M10,0 L12,0 L12,16 L10,16 L10,0 L10,0 Z M16,0 L20,0 L20,16 L16,16 L16,0 L16,0 Z M2,0 L6,0 L6,16 L2,16 L2,0 L2,0 Z M52,0 L54,0 L54,16 L52,16 L52,0 L52,0 Z M38,0 L40,0 L40,16 L38,16 L38,0 L38,0 Z M66,0 L68,0 L68,16 L66,16 L66,0 L66,0 Z M58,0 L64,0 L64,16 L58,16 L58,0 L58,0 Z M42,0 L48,0 L48,16 L42,16 L42,0 L42,0 Z'/></svg>");
+  background-size: 168px 32px;
+  background-repeat: repeat;
+  font-family: "Nunito", sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Page wrapper ── */
+.page-wrapper {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+
+/* ── Header ── */
+header {
+  text-align: center;
+  padding: 80px 0 56px;
+}
+.header-label {
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(34px, 5.6vw, 72px);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -2px;
+  white-space: nowrap;
+}
+header h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.header-sub {
+  font-family: "Lato", sans-serif;
+  margin-top: 22px;
+  font-size: clamp(14px, 1.4vw, 18px);
+  color: var(--ink-soft);
+  /* font-style: italic; */
+  line-height: 1.45;
+}
+
+/* ── Bookcase ── */
+.bookcase {
+  position: relative;
+}
+
+/* ── Shelf row ── */
+.shelf-row {
+  padding: 28px 0 0;
+  position: relative;
+}
+
+.books {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  min-height: 220px;
+  padding: 0 10px;
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+/* ── Flat wood plank ── */
+.shelf-plank {
+  position: relative;
+  height: 18px;
+  background: var(--plank);
+  border-top: 2px solid var(--plank-edge);
+  border-bottom: 5px solid var(--plank-edge);
+}
+
+/* ── Upright book: plain colored rectangle with vertical title ── */
+.book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  /* Outer shadow: visible; spine fill still clips to radius */
+  overflow: visible;
+  border-radius: 2px;
+  /* Soft lift from shelf, then spine: lit edge, fold shade, base contact */
+  box-shadow:
+    0 1px 2px rgba(15, 12, 10, 0.12),
+    0 1px 3px rgba(15, 12, 10, 0.06),
+    inset 1px 0 0 rgba(255, 255, 255, 0.2),
+    inset -3px 0 5px -1px rgba(0, 0, 0, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+.book-title-spine {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: "Nunito", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.3px;
+  text-align: center;
+  padding: 8px 2px;
+  max-height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* Spine type combinations (mixed stacks + weight for variety) */
+.book-title-spine.spine-combo-0 {
+  font-family: "Nunito", system-ui, sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: 0.3px;
+}
+.book-title-spine.spine-combo-1 {
+  font-family: "Lato", "Nunito", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  letter-spacing: 0.45px;
+}
+.book-title-spine.spine-combo-2 {
+  font-family: "Faculty Glyphic", "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.35px;
+  font-size: 9.5px;
+}
+.book-title-spine.spine-combo-3 {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.2px;
+  font-size: 10.5px;
+}
+.book-title-spine.spine-combo-4 {
+  font-family: "Playfair Display", "Lato", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.15px;
+}
+.book-title-spine.spine-combo-5 {
+  font-family: "Lato", "Playfair Display", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: 0.25px;
+  text-transform: none;
+  font-size: 9px;
+}
+
+/* Single / double line frames on some spines (color inherits book text) */
+.book-title-spine.spine-title--border-single {
+  border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
+  padding: 6px 3px;
+  border-radius: 1px;
+}
+.book-title-spine.spine-title--border-double {
+  border: 1px solid color-mix(in srgb, currentColor 50%, transparent);
+  outline: 1px solid color-mix(in srgb, currentColor 40%, transparent);
+  outline-offset: 2px;
+  padding: 5px 2px;
+  border-radius: 0;
+}
+
+/* ── Horizontal stack cluster ── */
+.stack-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Image topper on top of horizontal book stacks */
+.stack-topper {
+  display: block;
+  width: auto;
+  margin-bottom: 4px;
+  pointer-events: none;
+  user-select: none;
+}
+.stack-topper.plant-1 { height: 120px; }
+.stack-topper.plant-2 { height: 128px; }
+.stack-topper.snow-globe { height: 110px; }
+.stack-topper.earth-globe { height: 118px; }
+
+/* A single horizontal book: plain colored rectangle with inline title */
+.book-flat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  /* Stacked “pages” feel: top edge catch-light, bottom edge slightly in shadow */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+.book-flat-title {
+  font-family: "Nunito", sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
+  letter-spacing: 0.2px;
+  max-width: 100%;
+}
+
+/* ── Decorative shelf objects (images) ── */
+.shelf-deco {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 6px;
+}
+.shelf-deco img {
+  display: block;
+  height: 130px;
+  width: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Stats section ── */
+.stats-section {
+  margin-top: 72px;
+  padding: 0 8px;
+}
+.stats-title {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.4vw, 30px);
+  color: var(--ink);
+  margin-bottom: 28px;
+  text-align: center;
+}
+.stats-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.stats-counts {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  background: var(--card);
+  border: 2px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.stat-count {
+  flex: 1;
+  text-align: center;
+  padding: 28px 20px;
+  position: relative;
+  min-width: 0;
+}
+.stat-count + .stat-count::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 2px;
+  background: var(--card-border);
+}
+.stat-number {
+  font-family: "Lato", sans-serif;
+  font-size: clamp(34px, 4.5vw, 52px);
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-family: "Nunito", sans-serif;
+  font-size: clamp(10px, 1vw, 11px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 8px;
+  display: block;
+}
+
+/* ── Tablet responsive tweaks (768 – 1024 px) ── */
+@media (max-width: 1024px) {
+  .page-wrapper {
+    padding: 0 22px 64px;
+  }
+  header {
+    padding: 56px 0 40px;
+  }
+  .header-label {
+    letter-spacing: 5px;
+    margin-bottom: 14px;
+  }
+  .stats-section {
+    margin-top: 56px;
+  }
+  .stats-title {
+    margin-bottom: 22px;
+  }
+  .stat-count {
+    padding: 22px 12px;
+  }
+  .stat-label {
+    letter-spacing: 2px;
+  }
+}
+
+/* ── Mobile / small viewport notice ── */
+.mobile-notice {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .page-wrapper {
+    display: none;
+  }
+  .mobile-notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 40px 28px;
+    gap: 20px;
+  }
+  .mobile-notice .glyph {
+    font-size: 48px;
+  }
+  .mobile-notice h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1.15;
+    color: var(--ink);
+    max-width: 16ch;
+  }
+  .mobile-notice p {
+    font-family: "Playfair Display", serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-style: italic;
+    max-width: 32ch;
+  }
+}
